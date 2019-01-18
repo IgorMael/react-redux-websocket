@@ -1,0 +1,25 @@
+{
+    "name": "react-redux-websocket",
+    "version": "0.9.1",
+    "author": "Igor Mael",
+    "license": "UNLICENSE",
+    "main": "src/index.js",
+    "description": "redux-middleware send actions through a websocket and dispatch received messages",
+    "dependencies": {},
+    "keywords": [
+        "redux",
+        "middleware",
+        "redux-middleware",
+        "react",
+        "websocket",
+        "socket"
+    ],
+    "devDependencies": {
+        "jest": "^23.6.0",
+        "mock-socket": "^8.0.5"
+    },
+    "scripts": {
+        "test": "jest",
+        "test-coverage": "jest --coverage"
+    }
+}
