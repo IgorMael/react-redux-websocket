@@ -1,6 +1,7 @@
 {
     "name": "react-redux-websocket",
-    "version": "1.0.0",
+    "version": "1.0.1",
+    "repository": "github:IgorMael/react-redux-websocket",
     "author": "Igor Mael",
     "license": "UNLICENSE",
     "main": "src/index.js",
