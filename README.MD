@@ -35,7 +35,7 @@ import {createStore, applyMiddleware} from 'redux';
 import reduxWebsocket from 'react-redux-websocket';
 
 const socket = new WebSocket('ws://localhost:3030');
-const store = createStore(rootReducer, applyMiddleware(reduxWebsocket));
+const store = createStore(rootReducer, applyMiddleware(reduxWebsocket(socket)));
 ```
 
 ### Receiving actions
@@ -44,7 +44,7 @@ Any action received through the websocket will be dispatched and handled normall
 
 ### Dispatching actions
 
-Actions that shoulb be send through the network should have the special object **socket** with the key _send_ set to _ **true** _
+To send actions through the socket you need the special object **socket** with the key _send_ set to **true**
 
 ```js
 const FOO = 'FOO';
