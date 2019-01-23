@@ -80,9 +80,9 @@ function Bar() {
 ```
 
 ## Test
-
+run
 ```
-run npm test
+npm test
 ```
 
 ## License
