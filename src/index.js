@@ -26,24 +26,18 @@ exports.default = function(socket) {
         return function(next) {
             return function(action) {
                 if (action.socket && action.socket.send) {
-                    if (socket.readyState == 1) {
-                        if (!action.socket.keepSocket) {
-                            var _action = action,
-                                _socket = _action.socket,
-                                action2 = _objectWithoutProperties(_action, [
-                                    'socket'
-                                ]);
+                    if (!action.socket.keepSocket) {
+                        var _action = action,
+                            _socket = _action.socket,
+                            action2 = _objectWithoutProperties(_action, [
+                                'socket'
+                            ]);
 
-                            action = action2;
-                        }
-                        waitForSocket(
-                            socket,
-                            socket.send(JSON.stringify(action))
-                        );
-                    } else {
-                        if (action.socket && !action.socket.silent)
-                            throw new Error('Socket is not ready');
+                        action = action2;
                     }
+                    waitForSocket(socket, function() {
+                        return socket.send(JSON.stringify(action));
+                    });
                 }
                 return next(action);
             };
