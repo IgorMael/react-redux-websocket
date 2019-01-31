@@ -12,6 +12,12 @@ function _objectWithoutProperties(obj, keys) {
     return target;
 }
 
+function waitForSocket(socket, callback) {
+    setTimeout(function() {
+        socket.readyState === 1 ? callback() : waitForSocket(socket, callback);
+    }, 10);
+}
+
 exports.default = function(socket) {
     return function(store) {
         socket.onmessage = function(event) {
@@ -24,13 +30,19 @@ exports.default = function(socket) {
                         if (!action.socket.keepSocket) {
                             var _action = action,
                                 _socket = _action.socket,
-                                action2 = _objectWithoutProperties(_action, ['socket']);
+                                action2 = _objectWithoutProperties(_action, [
+                                    'socket'
+                                ]);
 
                             action = action2;
                         }
-                        socket.send(JSON.stringify(action));
+                        waitForSocket(
+                            socket,
+                            socket.send(JSON.stringify(action))
+                        );
                     } else {
-                        if (action.socket && !action.socket.silent) throw new Error('Socket is not ready');
+                        if (action.socket && !action.socket.silent)
+                            throw new Error('Socket is not ready');
                     }
                 }
                 return next(action);
